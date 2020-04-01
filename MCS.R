@@ -15,4 +15,3 @@ plot(xs,ys,pch='.',col=ifelse(in.circle,"blue","grey")
      ,xlab='',ylab='',asp=1,
      main=paste("MC Approximation of Pi =",mc.pi))
 
-Änderung
