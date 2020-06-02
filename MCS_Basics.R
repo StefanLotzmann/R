@@ -73,3 +73,18 @@ for (i in 1:N) {
 
 hist(simulated_means)    
 sd(simulated_means)
+
+
+# Einfluss der Anzahl der Simulationsschritte und der Stichprobengröße auf die Konvergenz 
+norm.simulated.mc_4 <- replicate(n = 2000, rnorm(n = 25, mean = 5, sd = 2))
+norm.simulated.mc_5 <- replicate(n = 2000, rnorm(n = 100, mean = 5, sd = 2))
+norm.simulated.mc_6 <- replicate(n = 2000, rnorm(n = 1000, mean = 5, sd = 2))
+
+sd(apply(X = norm.simulated.mc_4, MARGIN = 2, FUN = mean))
+sd(apply(X = norm.simulated.mc_5, MARGIN = 2, FUN = mean))
+sd(apply(X = norm.simulated.mc_6, MARGIN = 2, FUN = mean))
+
+par(mfrow = c(3,1))
+hist(apply(X = norm.simulated.mc_4, MARGIN = 2, FUN = mean))
+hist(apply(X = norm.simulated.mc_5, MARGIN = 2, FUN = mean))
+hist(apply(X = norm.simulated.mc_6, MARGIN = 2, FUN = mean))                   # man sieht deutlich: für große Stichprobenumfänge kovergiert der Standardfehler gegen 0
