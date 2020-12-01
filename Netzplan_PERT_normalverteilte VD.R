@@ -36,7 +36,7 @@ prec1and2<-matrix(c(0,1,1,0,0,0,0,0,0,0,0,0,0,
 #### Berechnung des PERT-Netzplanes (Vor- und Rückwärtsterminierung) ####
 schedule.pert(prec1and2=prec1and2, duration = n$mu, PRINT=TRUE)
 
-#### Definition der PDF f??r jeden Vorgang ####
+#### Definition der PDF für jeden Vorgang ####
 distribution<-c("NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL")
 
 #### Erzeugen einer Matrix mit den notwendigen Verteilungsparametern (Normalverteilung) ####
@@ -47,10 +47,10 @@ set.seed(1024)
 stochastic.pert(prec1and2=prec1and2,distribution=distribution,values=values, percentile = 0.95, compilations = 100000)
 
 ### Varianz der Vorgangsdauern auf dem kritischen Pfad ####
-variance = n$var[1] + n$var[2] + n$var[4] + n$var[5] ++n$var[6] + n$var[8] + n$var[10] + n$var[11] + n$var[12] + n$var[13]
+variance = n$var[1] + n$var[2] + n$var[4] + n$var[6] + n$var[8] + n$var[10] + n$var[11] + n$var[12] + n$var[13]
 sigma = sqrt(variance)
 
 #### Berechnung der Wahrscheinlichkeiten, dass das Projekt spätestens nach 359 oder 377 ZE endet ####
-mu = 358.8328
+mu = 358.9506
 pnorm((359-mu)/sigma)
 pnorm((377-mu)/sigma)
