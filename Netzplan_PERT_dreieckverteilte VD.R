@@ -17,7 +17,7 @@ est =  function(opt,act,pes) {
 }
 n = est(opt,mol,pes)
 
-#### Definition der Präzedenz-Matrix aller Vorgänge ####
+#### Definition der Präzedenten-Matrix aller Vorgänge ####
 prec1and2 <- matrix(c(0,1,1,0,0,0,0,0,0,0,0,0,0,
                       0,0,0,1,1,0,0,0,0,0,0,0,0,
                       0,0,0,1,0,0,0,0,0,0,0,0,0,
@@ -41,7 +41,7 @@ distribution <- c("TRIANGLE","TRIANGLE","TRIANGLE","TRIANGLE","TRIANGLE","TRIANG
 #### Erzeugen einer Matrix mit den notwendigen Verteilungsparametern (Dreieckverteilung) ####
 values = matrix(c(opt,pes,mol),13,3 );values
 
-#### Simulation des PERT-Netzplanes unter der Annahme Vorgansdauern sind i.i.d. Tri(a,c,b) ####
+#### Simulation des PERT-Netzplanes unter der Annahme Vorgansdauern sind i.i.d. Triangle(opt,act,pes) ####
 set.seed(1024)
 stochastic.pert(prec1and2=prec1and2,distribution=distribution,values=values, percentile = 0.95, compilations = 100000)
 
