@@ -8,36 +8,35 @@ mol = c(108,135,116,0,23,35,0,15,33,10,24,6,5)
 pes = c(195,190,120,0,33,46,0,24,46,12,34,7,8)
 
 #### Funktion zur Berechnung von Mittelwert,Varianz und Standardabweichung für Modell mit Normalverteilung ####
-est =  function(opt,act,pes)
-{
-  mu  = (opt+4*mol+pes)/6
-  sd  = (pes - opt) / 6
-  var = sd^2 
-  mat = round(data.frame(mu,sd,var),2)
-  print(mat)
+est =  function(opt,act,pes) {
+    mu  = (opt+4*mol+pes)/6
+    sd  = (pes - opt) / 6
+    var = sd^2 
+    mat = round(data.frame(mu,sd,var),2)
+    print(mat)
 }
 n = est(opt,mol,pes)
 
-#### Definition der Präzedenz-Matrix aller Vorgänge ####
-prec1and2<-matrix(c(0,1,1,0,0,0,0,0,0,0,0,0,0,
-                    0,0,0,1,1,0,0,0,0,0,0,0,0,
-                    0,0,0,1,0,0,0,0,0,0,0,0,0,
-                    0,0,0,0,0,1,0,0,0,0,0,0,0,
-                    0,0,0,0,0,0,1,0,1,0,0,0,0,
-                    0,0,0,0,0,0,0,1,0,0,0,0,0,
-                    0,0,0,0,0,0,0,1,0,0,0,0,0,
-                    0,0,0,0,0,0,0,0,0,1,0,0,0,
-                    0,0,0,0,0,0,0,0,0,0,1,0,0,
-                    0,0,0,0,0,0,0,0,0,0,1,0,0,
-                    0,0,0,0,0,0,0,0,0,0,0,1,0,
-                    0,0,0,0,0,0,0,0,0,0,0,0,1,
-                    0,0,0,0,0,0,0,0,0,0,0,0,0),nrow=13,ncol=13,byrow=TRUE) 
+#### Definition der Präzedenten-Matrix aller Vorgänge ####
+prec1and2 <- matrix(c(0,1,1,0,0,0,0,0,0,0,0,0,0,
+                      0,0,0,1,1,0,0,0,0,0,0,0,0,
+                      0,0,0,1,0,0,0,0,0,0,0,0,0,
+                      0,0,0,0,0,1,0,0,0,0,0,0,0,
+                      0,0,0,0,0,0,1,0,1,0,0,0,0,
+                      0,0,0,0,0,0,0,1,0,0,0,0,0,
+                      0,0,0,0,0,0,0,1,0,0,0,0,0,
+                      0,0,0,0,0,0,0,0,0,1,0,0,0,
+                      0,0,0,0,0,0,0,0,0,0,1,0,0,
+                      0,0,0,0,0,0,0,0,0,0,1,0,0,
+                      0,0,0,0,0,0,0,0,0,0,0,1,0,
+                      0,0,0,0,0,0,0,0,0,0,0,0,1,
+                      0,0,0,0,0,0,0,0,0,0,0,0,0),nrow=13,ncol=13,byrow=TRUE) 
 
 #### Berechnung des PERT-Netzplanes (Vor- und Rückwärtsterminierung) ####
 schedule.pert(prec1and2=prec1and2, duration = n$mu, PRINT=TRUE)
 
 #### Definition der PDF für jeden Vorgang ####
-distribution<-c("NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL")
+distribution <- c("NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL","NORMAL")
 
 #### Erzeugen einer Matrix mit den notwendigen Verteilungsparametern (Normalverteilung) ####
 values = matrix(c(n$mu,n$sd),13,2 );values
